@@ -7,10 +7,10 @@ COPY ./packages /bookcars/packages
 RUN set -e && \
   find ./ -mindepth 1 -maxdepth 1 -type d \
   -exec sh -c 'for dir; do \
-    if [ -f "$dir/package.json" ]; then \
-      echo "Installing dependencies in $dir"; \
-      npm --prefix "$dir" install; \
-    fi; \
+  if [ -f "$dir/package.json" ]; then \
+  echo "Installing dependencies in $dir"; \
+  npm --prefix "$dir" install; \
+  fi; \
   done' _ {} +
 
 
@@ -26,5 +26,5 @@ COPY ./frontend/.env.docker .env
 # Copy preinstalled internal packages
 COPY --from=packages /bookcars/packages /bookcars/packages
 
-EXPOSE 8080
+EXPOSE 8081
 CMD ["npm", "run", "dev:docker"]

@@ -26,7 +26,7 @@ services:
       - mongo
 
   bc-backend:
-    build: 
+    build:
       context: .
       dockerfile: ./backend/Dockerfile
     env_file: ./backend/.env.docker
@@ -40,7 +40,7 @@ services:
       - backend_logs:/bookcars/backend/logs
 
   bc-admin:
-    build: 
+    build:
       context: .
       dockerfile: ./admin/Dockerfile
     depends_on:
@@ -49,13 +49,13 @@ services:
       - 3001:3001
 
   bc-frontend:
-    build: 
+    build:
       context: .
       dockerfile: ./frontend/Dockerfile
     depends_on:
       - bc-backend
     ports:
-      - 8080:80
+      - 8081:80
       - 8443:443
     volumes:
       - cdn:/var/www/cdn/bookcars
